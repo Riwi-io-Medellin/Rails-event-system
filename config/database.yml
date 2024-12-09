@@ -4,12 +4,11 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   password: <%= ENV["DATABASE_PASSWORD_LOCAL"] %>
   username: <%= ENV["DATABASE_USER_LOCAL"] %>
-  host: <%= ENV["DATABASE_HOST_LOCAL"] %>
+  host: <%= ENV["HOST_LOCAL"] %>
 
 development:
   <<: *default
   database: event_system_development-s
-
 test:
   <<: *default
   database: event_system_test
