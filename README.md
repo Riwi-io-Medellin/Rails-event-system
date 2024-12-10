@@ -832,12 +832,6 @@ es:
 ```
 # **Step 10: Active storage**
 
-Here’s the improved section in English, following the structure and style of your document:
-
----
-
-**10. Configure Active Storage**
-
 1. **Install Active Storage**  
    Run the Active Storage generator to add the necessary tables to your database schema:
 
@@ -863,8 +857,15 @@ Here’s the improved section in English, following the structure and style of y
   # active_storage_variant_records: Records variants or transformations of files.
    This table tracks different versions of a file, such as resized images or other processed variants.
 
+3. **Install Cloudinary gem**  
+   Define the gem for the cloudinary services in `Gemfile`.
 
-3. **Set up storage configuration**  
+  ```yaml
+    # assets img cloud
+    gem 'cloudinary', '~> 2.2'
+  ```
+
+4. **Set up storage configuration**  
    Define the storage services in `config/storage.yml`. For example, to use Cloudinary:
 
    ```yaml
@@ -875,17 +876,17 @@ Here’s the improved section in English, following the structure and style of y
      api_secret: <your_api_secret>
    ```
 
-4. **Create the Cloudinary configuration file**  
+5. **Create the Cloudinary configuration file**  
    If you're using Cloudinary, ensure you have a specific configuration file at `config/cloudinary.yml` (optional, depending on your integration).
 
-5. **Configure the development environment**  
+6. **Configure the development environment**  
    Specify the storage service to use in your development environment in `config/environments/development.rb`:
 
    ```ruby
    config.active_storage.service = :cloudinary
    ```
 
-6. **Attach files to models**  
+7. **Attach files to models**  
    In your models, use `has_one_attached` or `has_many_attached` to associate files with records. Example:
 
    ```ruby
@@ -894,7 +895,7 @@ Here’s the improved section in English, following the structure and style of y
    end
    ```
 
-7. **Access attachments in views**  
+8. **Access attachments in views**  
    Use the `url_for` method to display images or attached files in your views:
 
    ```erb
@@ -904,8 +905,3 @@ Here’s the improved section in English, following the structure and style of y
      <%= image_tag "default-avatar.png", alt: "Default Avatar" %>
    <% end %>
    ```
-
-**Complete Example for Development Configuration:**
-- Add necessary gems for file management and remote storage.
-- Configure storage services in `storage.yml`.
-- Specify the active storage service in the appropriate environment file.
