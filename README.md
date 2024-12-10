@@ -830,3 +830,78 @@ es:
         other: "%{count} errores impidieron guardar este %{model}"
       body: "Los siguientes errores necesitan ser corregidos:"
 ```
+# **Step 10: Active storage**
+
+1. **Install Active Storage**  
+   Run the Active Storage generator to add the necessary tables to your database schema:
+
+   ```bash
+   rails active_storage:install
+   ```
+
+2. **Run the migrations**  
+   Apply the migrations to create the Active Storage tables in your database:
+
+   ```bash
+   rails db:migrate
+   ```
+
+  - active_storage_attachments: Relates attachments to models in your application.**
+   This table establishes the association between a record (e.g., User, Post) 
+   and the attached files stored in Active Storage.
+
+  - active_storage_blobs: Stores metadata and details of the original file.
+   This table contains information like file name, content type, size, and storage key 
+   to locate and retrieve the file from the storage service.
+
+  - active_storage_variant_records: Records variants or transformations of files.
+   This table tracks different versions of a file, such as resized images or other processed variants.
+
+3. **Install Cloudinary gem**  
+   Define the gem for the cloudinary services in `Gemfile`.
+
+  ```yaml
+    # assets img cloud
+    gem 'cloudinary', '~> 2.2'
+  ```
+
+4. **Set up storage configuration**  
+   Define the storage services in `config/storage.yml`. For example, to use Cloudinary:
+
+   ```yaml
+   cloudinary:
+     service: Cloudinary
+     cloud_name: <your_cloud_name>
+     api_key: <your_api_key>
+     api_secret: <your_api_secret>
+   ```
+
+5. **Create the Cloudinary configuration file**  
+   If you're using Cloudinary, ensure you have a specific configuration file at `config/cloudinary.yml` (optional, depending on your integration).
+
+6. **Configure the development environment**  
+   Specify the storage service to use in your development environment in `config/environments/development.rb`:
+
+   ```ruby
+   config.active_storage.service = :cloudinary
+   ```
+
+7. **Attach files to models**  
+   In your models, use `has_one_attached` or `has_many_attached` to associate files with records. Example:
+
+   ```ruby
+   class User < ApplicationRecord
+     has_one_attached :avatar
+   end
+   ```
+
+8. **Access attachments in views**  
+   Use the `url_for` method to display images or attached files in your views:
+
+   ```erb
+   <% if user.avatar.attached? %>
+     <%= image_tag url_for(user.avatar), alt: "User Avatar" %>
+   <% else %>
+     <%= image_tag "default-avatar.png", alt: "Default Avatar" %>
+   <% end %>
+   ```

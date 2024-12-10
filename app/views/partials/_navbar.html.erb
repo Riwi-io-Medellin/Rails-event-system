@@ -6,7 +6,11 @@
      </div>
 
   <% if admin_user? %>
-    <%= image_tag "https://media.giphy.com/media/11JTxkrmq4bGE0/giphy.gif", alt: "GIF animado" , style:"width: 75px; border-radius: 100%;"%>
+    <% if current_user.avatar.attached? %>
+      <%= image_tag url_for(current_user.avatar), alt: "Avatar del usuario", style: "width: 75px; border-radius: 100%; margin-left: 25%;" %>
+    <% else %>
+      <%= image_tag "https://media.giphy.com/media/11JTxkrmq4bGE0/giphy.gif", alt: "GIF animado", style: "width: 75px; border-radius: 100%;" %>
+    <% end %>
   <% end %>
 
     <!-- Menú de navegación -->

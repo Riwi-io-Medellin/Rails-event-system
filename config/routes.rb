@@ -5,7 +5,10 @@ Rails.application.routes.draw do
     # translation
   scope "(:locale)", locale: /en|es|ja/ do
 
-    devise_for :users
+    devise_for :users, controllers: {
+      registrations: 'users/registrations'
+    }
+
     resources :events
     # Defines the root path route ("/")
     root "events#index"
