@@ -46,6 +46,23 @@
         <%= f.password_field :current_password, autocomplete: "current-password", class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
       </div>
 
+      <!-- Campo de Avatar -->
+      <div class="mb-4">
+        <%= f.label :avatar, class: "block text-gray-700 font-bold mb-2" %>
+        <%= f.file_field :avatar, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+      </div>
+
+      <!-- Mostrar la imagen actual (si existe) -->
+
+        <% if admin_user? %>
+          <% if current_user.avatar.attached? %>
+            <%= image_tag url_for(current_user.avatar), alt: "Avatar del usuario", style: "width: 75px; border-radius: 100%; margin: auto;" %>
+          <% else %>
+            <%= image_tag "https://media.giphy.com/media/11JTxkrmq4bGE0/giphy.gif", alt: "GIF animado", style: "width: 75px; border-radius: 100%;" %>
+          <% end %>
+        <% end %>
+
+
       <!-- Botón de Actualizar -->
       <div class="flex items-center justify-center">
         <%= f.submit "Update", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
