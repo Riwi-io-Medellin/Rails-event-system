@@ -846,15 +846,15 @@ es:
    rails db:migrate
    ```
 
-  # active_storage_attachments: Relates attachments to models in your application.
+  - active_storage_attachments: Relates attachments to models in your application.**
    This table establishes the association between a record (e.g., User, Post) 
    and the attached files stored in Active Storage.
 
-  # active_storage_blobs: Stores metadata and details of the original file.
+  - active_storage_blobs: Stores metadata and details of the original file.
    This table contains information like file name, content type, size, and storage key 
    to locate and retrieve the file from the storage service.
 
-  # active_storage_variant_records: Records variants or transformations of files.
+  - active_storage_variant_records: Records variants or transformations of files.
    This table tracks different versions of a file, such as resized images or other processed variants.
 
 3. **Install Cloudinary gem**  
