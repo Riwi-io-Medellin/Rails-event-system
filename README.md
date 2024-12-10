@@ -830,3 +830,70 @@ es:
         other: "%{count} errores impidieron guardar este %{model}"
       body: "Los siguientes errores necesitan ser corregidos:"
 ```
+# **Step 10: Active storage**
+
+Here’s the improved section in English, following the structure and style of your document:
+
+---
+
+**10. Configure Active Storage**
+
+1. **Install Active Storage**  
+   Run the Active Storage generator to add the necessary tables to your database schema:
+
+   ```bash
+   rails active_storage:install
+   ```
+
+2. **Run the migrations**  
+   Apply the migrations to create the Active Storage tables in your database:
+
+   ```bash
+   rails db:migrate
+   ```
+
+3. **Set up storage configuration**  
+   Define the storage services in `config/storage.yml`. For example, to use Cloudinary:
+
+   ```yaml
+   cloudinary:
+     service: Cloudinary
+     cloud_name: <your_cloud_name>
+     api_key: <your_api_key>
+     api_secret: <your_api_secret>
+   ```
+
+4. **Create the Cloudinary configuration file**  
+   If you're using Cloudinary, ensure you have a specific configuration file at `config/cloudinary.yml` (optional, depending on your integration).
+
+5. **Configure the development environment**  
+   Specify the storage service to use in your development environment in `config/environments/development.rb`:
+
+   ```ruby
+   config.active_storage.service = :cloudinary
+   ```
+
+6. **Attach files to models**  
+   In your models, use `has_one_attached` or `has_many_attached` to associate files with records. Example:
+
+   ```ruby
+   class User < ApplicationRecord
+     has_one_attached :avatar
+   end
+   ```
+
+7. **Access attachments in views**  
+   Use the `url_for` method to display images or attached files in your views:
+
+   ```erb
+   <% if user.avatar.attached? %>
+     <%= image_tag url_for(user.avatar), alt: "User Avatar" %>
+   <% else %>
+     <%= image_tag "default-avatar.png", alt: "Default Avatar" %>
+   <% end %>
+   ```
+
+**Complete Example for Development Configuration:**
+- Add necessary gems for file management and remote storage.
+- Configure storage services in `storage.yml`.
+- Specify the active storage service in the appropriate environment file.

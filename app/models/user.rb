@@ -5,6 +5,9 @@ class User < ApplicationRecord
   :recoverable, :rememberable, :confirmable
 
   has_many :events, dependent: :destroy
+  
+  # storage with active storage
+  has_one_attached :avatar
 
   # Callback after user creation to send confirmation email
   after_create :send_confirmation_email
