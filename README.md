@@ -895,6 +895,18 @@ es:
    end
    ```
 
+   8. **Permit attachment parameters in controllers** 
+  To allow the avatar parameter to be processed in your controller, include it in the list of permitted parameters. Example:
+
+   ```ruby
+   class UsersController < ApplicationController
+    def user_params
+      params.require(:user).permit(:avatar)
+    end
+  end
+   ```
+  This ensures that the avatar attribute can be uploaded when creating or updating a user.
+
 8. **Access attachments in views**  
    Use the `url_for` method to display images or attached files in your views:
 
