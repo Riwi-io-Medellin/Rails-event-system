@@ -895,15 +895,14 @@ es:
    end
    ```
 
-   8. **Permit attachment parameters in controllers** 
+8. **Permit attachment parameters in controllers** 
   To allow the avatar parameter to be processed in your controller, include it in the list of permitted parameters. Example:
-
    ```ruby
    class UsersController < ApplicationController
-    def user_params
-      params.require(:user).permit(:avatar)
+      def user_params
+        params.require(:user).permit(:avatar)
+      end
     end
-  end
    ```
   This ensures that the avatar attribute can be uploaded when creating or updating a user.
 
